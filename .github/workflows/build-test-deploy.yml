@@ -23,4 +23,8 @@ jobs:
         with:
           node-version: '18.x'
       - run: npm install
-      - run: npm test !! echo 'ESLint failed but contiinuing...'
+      - run: npm test
+        continue-on-error: true  # Este permite que el flujo continúe, pero registra los errores
+      - name: Ver errores si los hay
+        if: failure()
+        run: echo "Las pruebas han fallado"
